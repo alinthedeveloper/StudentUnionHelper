@@ -6,11 +6,4 @@
 //
 
 class ScannerViewModel: ObservableObject {
-    @Published var currentLocation: Location?
-    
-    func setLocation (from id: String)
-    {
-        // grab the location from the qr code
-        
-    }
 }
