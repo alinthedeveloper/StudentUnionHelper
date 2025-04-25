@@ -5,6 +5,8 @@
 //  Created by Grant Olson on 4/24/25.
 //
 
+import SwiftUI
+
 class ScannerViewModel: ObservableObject {
     @Published var currentLocation: Location?
     

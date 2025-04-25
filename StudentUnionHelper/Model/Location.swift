@@ -3,10 +3,12 @@
 //  StudentUnionHelper
 //
 //  Created by Grant Olson on 4/24/25.
-//
+//  Holds information about each scannable location
 
-struct Location: Codable {
-    //location data
-    let index: Int
-    let name: String
+import CoreGraphics
+
+struct Location: Codable, Identifiable {
+    var id: String
+    var name: String
+    var coordinates: CGPoint
 }
