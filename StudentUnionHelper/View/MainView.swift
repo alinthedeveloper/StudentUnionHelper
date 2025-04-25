@@ -12,6 +12,7 @@ import CoreLocation
 struct MainView: View {
     @EnvironmentObject var NavViewModel: NavViewModel
     @EnvironmentObject var scannerViewModel: ScannerViewModel
+    @State private var showingScanner: Bool = false
     
     var body: some View {
         VStack {
@@ -19,6 +20,16 @@ struct MainView: View {
             }
             else {
                 Text("Scan a QR code to begin")
+                    .sheet(isPresented: $showingScanner){
+                        CameraView {
+                            scannedCode in scannerViewModel.setLocation (from: scannedCode)
+                            showingScanner = false
+                        }
+                    }
+                Button("Scan")
+                {
+                    showingScanner = true
+                }
             }
         }
     }
