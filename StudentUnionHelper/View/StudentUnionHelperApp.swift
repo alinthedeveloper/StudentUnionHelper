@@ -14,7 +14,7 @@ struct StudentUnionHelperApp: App {
     
     var body: some Scene {
         WindowGroup {
-            NavView()
+            MainView()
                 .environmentObject(viewModel)
         }
     }
