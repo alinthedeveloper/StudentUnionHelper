@@ -29,9 +29,22 @@
 		72990FF42DBAEE5F00A5619E /* StudentUnionHelperUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StudentUnionHelperUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		7299102A2DBB211900A5619E /* Exceptions for "StudentUnionHelper" folder in "StudentUnionHelper" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 72990FD72DBAEE5D00A5619E /* StudentUnionHelper */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		72990FDA2DBAEE5D00A5619E /* StudentUnionHelper */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				7299102A2DBB211900A5619E /* Exceptions for "StudentUnionHelper" folder in "StudentUnionHelper" target */,
+			);
 			path = StudentUnionHelper;
 			sourceTree = "<group>";
 		};
@@ -399,7 +412,8 @@
 				DEVELOPMENT_TEAM = A2MDLMSGQK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires camera access to scan QR codes and barcodes.";
+				INFOPLIST_FILE = StudentUnionHelper/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app needs camera access to scan QR codes for navigation purposes.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -429,7 +443,8 @@
 				DEVELOPMENT_TEAM = A2MDLMSGQK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires camera access to scan QR codes and barcodes.";
+				INFOPLIST_FILE = StudentUnionHelper/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app needs camera access to scan QR codes for navigation purposes.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

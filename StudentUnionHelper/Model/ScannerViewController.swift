@@ -8,41 +8,75 @@
 import UIKit
 import AVFoundation
 
-class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate
-{
+import UIKit
+import AVFoundation
+
+class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     var onFound: ((String) -> Void)?
-    
-    private let session = AVCaptureSession()
-    private var previewLayer: AVCaptureVideoPreviewLayer?
-    
+
+    private var captureSession: AVCaptureSession!
+    private var previewLayer: AVCaptureVideoPreviewLayer!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        view.backgroundColor = .black
+        captureSession = AVCaptureSession()
+
         guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else { return }
-        let videoInput = try? AVCaptureDeviceInput(device: videoCaptureDevice)
-        if session.canAddInput(videoInput!)
-        {
-            session.addInput(videoInput!)
+        let videoInput: AVCaptureDeviceInput
+
+        do {
+            videoInput = try AVCaptureDeviceInput(device: videoCaptureDevice)
+        } catch {
+            return
         }
-        let metadataOutput = AVCaptureVideoPreviewLayer(session: session)
-        previewLayer?.frame = view.layer.bounds
-        previewLayer?.videoGravity = .resizeAspectFill
-        if let layer = previewLayer
-        {
-            view.layer.addSublayer(layer)
+
+        if captureSession.canAddInput(videoInput) {
+            captureSession.addInput(videoInput)
+        } else {
+            return
         }
-        
-        session.startRunning()
-        
+
+        let metadataOutput = AVCaptureMetadataOutput()
+
+        if captureSession.canAddOutput(metadataOutput) {
+            captureSession.addOutput(metadataOutput)
+
+            metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
+            metadataOutput.metadataObjectTypes = [.qr]
+        } else {
+            return
+        }
+
+        previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+        previewLayer.frame = view.layer.bounds
+        previewLayer.videoGravity = .resizeAspectFill
+        view.layer.addSublayer(previewLayer)
+
+        DispatchQueue.global(qos: .userInitiated).async {
+            self.captureSession.startRunning()
+        }
     }
-    
-    func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection)
-    {
-        session.stopRunning()
-        if let object = metadataObjects.first as? AVMetadataMachineReadableCodeObject,
-            let stringValue = object.stringValue
-        {
-            onFound?(stringValue)
+
+    func metadataOutput(_ output: AVCaptureMetadataOutput,
+                        didOutput metadataObjects: [AVMetadataObject],
+                        from connection: AVCaptureConnection) {
+        captureSession.stopRunning()
+
+        if let metadataObject = metadataObjects.first as? AVMetadataMachineReadableCodeObject,
+           let stringValue = metadataObject.stringValue {
+
+            DispatchQueue.main.async {
+                self.onFound?(stringValue)
+                self.dismiss(animated: true)
+            }
+        }
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if captureSession.isRunning {
+            captureSession.stopRunning()
         }
     }
 }

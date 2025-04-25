@@ -10,12 +10,14 @@ import SwiftData
 
 @main
 struct StudentUnionHelperApp: App {
-    @StateObject var viewModel = NavViewModel()
+    @StateObject var navModel = NavViewModel()
+    @StateObject var scanModel = ScannerViewModel()
     
     var body: some Scene {
         WindowGroup {
             MainView()
-                .environmentObject(viewModel)
+                .environmentObject(navModel)
+                .environmentObject(scanModel)
         }
     }
 }

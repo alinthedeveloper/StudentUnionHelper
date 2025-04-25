@@ -10,25 +10,27 @@ import CoreLocation
 
 
 struct MainView: View {
-    @EnvironmentObject var NavViewModel: NavViewModel
-    @EnvironmentObject var scannerViewModel: ScannerViewModel
-    @State private var showingScanner: Bool = false
-    
+    @EnvironmentObject var navModel: NavViewModel
+    @EnvironmentObject var scanModel: ScannerViewModel
+    @State private var showingScanner = false
+
     var body: some View {
         VStack {
-            if let location = NavViewModel.currentLocation {Text("You're at: \(location.name)")
-            }
-            else {
+            if let location = scanModel.currentLocation {
+                Text("You're at: \(location.name)")
+            } else {
                 Text("Scan a QR code to begin")
-                    .sheet(isPresented: $showingScanner){
-                        CameraView {
-                            scannedCode in scannerViewModel.setLocation (from: scannedCode)
-                            showingScanner = false
-                        }
-                    }
-                Button("Scan")
-                {
+
+                Button("Scan") {
                     showingScanner = true
+                }
+                .sheet(isPresented: $showingScanner) {
+                    CameraView { scannedCode in
+                        scanModel.setLocation(from: scannedCode)
+                        showingScanner = false
+                        print("Scanned ID: '\(scannedCode)'")
+                    }
+                    .environmentObject(scanModel)
                 }
             }
         }
