@@ -21,15 +21,16 @@ public class Coordinator: NSObject, ARSCNViewDelegate
     public func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor)
     {
         guard let _ = anchor as? ARImageAnchor else { return }
-        let label = UILabel()
-        label.text = location.name
-        label.textColor = .white
-        label.backgroundColor = .black
-        label.font = .systemFont(ofSize: 24, weight: .bold)
-        label.textAlignment = .center
-        label.frame = CGRect(x: 20, y: 40, width: 250, height: 50)
         
         DispatchQueue.main.async {
+            let label = UILabel()
+            label.text = self.location.name
+            label.textColor = .white
+            label.backgroundColor = .black
+            label.font = .systemFont(ofSize: 24, weight: .bold)
+            label.textAlignment = .center
+            label.frame = CGRect(x: 20, y: 40, width: 250, height: 50)
+            
             if let view = renderer as? ARSCNView {
                 view.addSubview(label)
             }
