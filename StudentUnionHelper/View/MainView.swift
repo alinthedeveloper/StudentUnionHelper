@@ -18,7 +18,7 @@ struct MainView: View {
     var body: some View {
         VStack {
             if let location = scanModel.currentLocation {
-                ARView()
+                ARView(location: location)
                     .edgesIgnoringSafeArea(.all)
             } else {
                 Text("Scan a QR code to begin")
