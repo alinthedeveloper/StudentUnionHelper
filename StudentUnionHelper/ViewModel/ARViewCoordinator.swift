@@ -1,0 +1,38 @@
+//
+//  ARViewCoordinator.swift
+//  StudentUnionHelper
+//
+//  Created by Grant Olson on 4/30/25.
+//
+
+import ARKit
+import SceneKit
+import SwiftUI
+
+public class Coordinator: NSObject, ARSCNViewDelegate
+{
+    let location: Location
+    
+    init(location: Location)
+    {
+        self.location = location
+    }
+    
+    public func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor)
+    {
+        guard let _ = anchor as? ARImageAnchor else { return }
+        let label = UILabel()
+        label.text = location.name
+        label.textColor = .white
+        label.backgroundColor = .black
+        label.font = .systemFont(ofSize: 24, weight: .bold)
+        label.textAlignment = .center
+        label.frame = CGRect(x: 20, y: 40, width: 250, height: 50)
+        
+        DispatchQueue.main.async {
+            if let view = renderer as? ARSCNView {
+                view.addSubview(label)
+            }
+        }
+    }
+}
