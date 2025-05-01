@@ -5,7 +5,16 @@
   },
   "resources" : [
     {
-      "filename" : "test.arreferenceimage"
+      "filename" : "Food Court.arreferenceimage"
+    },
+    {
+      "filename" : "Help Desk.arreferenceimage"
+    },
+    {
+      "filename" : "Main Entrance.arreferenceimage"
+    },
+    {
+      "filename" : "Main Hall.arreferenceimage"
     }
   ]
 }

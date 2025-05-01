@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "test.png",
+      "filename" : "IMG_2913.JPG",
       "idiom" : "universal"
     }
   ],
@@ -11,6 +11,6 @@
   },
   "properties" : {
     "unit" : "inches",
-    "width" : 8.5
+    "width" : 9.4444444444444446
   }
 }

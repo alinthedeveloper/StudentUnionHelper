@@ -12,7 +12,10 @@ class ScannerViewModel: ObservableObject {
     
     
     private let dummyLocations: [String: Location] = [
-        "01": Location(id: "01", name: "Main_Entrance", coordinates: CGPoint(x: 1, y: 1))
+        "01": Location(id: "01", name: "Main Entrance", coordinates: CGPoint(x: 1, y: 1)),
+        "02": Location(id: "02", name: "Help Desk", coordinates: CGPoint(x: 1, y: 1)),
+        "03": Location(id: "03", name: "Main Hall", coordinates: CGPoint(x: 1, y: 1)),
+        "04": Location(id: "04", name: "Buster's Kitchen", coordinates: CGPoint(x: 1, y: 1))
     ]
                           
     func setLocation (from id: String)
