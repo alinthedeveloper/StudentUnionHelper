@@ -4,7 +4,6 @@
 //
 //  Created by Grant Olson on 4/30/25.
 //
-
 import ARKit
 import SceneKit
 import SwiftUI
@@ -21,12 +20,20 @@ public class Coordinator: NSObject, ARSCNViewDelegate
     public func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor)
     {
         guard let _ = anchor as? ARImageAnchor else { return }
+        
+        let shaft = SCNCylinder(radius: 0.005, height: 0.1)
+        let shaftNode = SCNNode(geometry: shaft)
+        shaftNode.position = SCNVector3(0, 0.05, 0)
 
-        // Add a blue directional arrow above the image anchor
+        let tip = SCNCone(topRadius: 0, bottomRadius: 0.01, height: 0.03)
+        let tipNode = SCNNode(geometry: tip)
+        tipNode.position = SCNVector3(0, 0.11, 0)
+
         let arrowNode = SCNNode()
-        arrowNode.geometry = SCNBox(width: 0.05, height: 0.01, length: 0.2, chamferRadius: 0)
-        arrowNode.geometry?.firstMaterial?.diffuse.contents = UIColor.blue
-        arrowNode.position = SCNVector3(0, 0.05, 0)
+        arrowNode.addChildNode(shaftNode)
+        arrowNode.addChildNode(tipNode)
+        arrowNode.eulerAngles = SCNVector3(-Float.pi / 2, 0, 0)
+
         node.addChildNode(arrowNode)
 
         DispatchQueue.main.async {
