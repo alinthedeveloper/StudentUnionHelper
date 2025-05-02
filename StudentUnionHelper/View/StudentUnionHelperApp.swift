@@ -15,7 +15,7 @@ struct StudentUnionHelperApp: App {
     
     var body: some Scene {
         WindowGroup {
-            HomeView()
+           HomeView()
                 .environmentObject(navModel)
                 .environmentObject(scanModel)
         }

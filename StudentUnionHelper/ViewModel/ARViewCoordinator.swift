@@ -50,7 +50,7 @@ public class Coordinator: NSObject, ARSCNViewDelegate
             label.backgroundColor = .black
             label.font = .systemFont(ofSize: 24, weight: .bold)
             label.textAlignment = .center
-            label.frame = CGRect(x: 20, y: 40, width: 250, height: 50)
+            label.frame = CGRect(x: 80, y: 750, width: 250, height: 50)
 
             if let view = renderer as? ARSCNView {
                 view.addSubview(label)

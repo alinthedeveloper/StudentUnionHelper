@@ -23,4 +23,8 @@ class ScannerViewModel: ObservableObject {
         // grab the location from the qr code
         currentLocation = dummyLocations[id]
     }
+    
+    func clearLocation() {
+        currentLocation = nil
+    }
 }
