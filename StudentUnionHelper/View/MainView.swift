@@ -45,11 +45,28 @@ struct MainView: View {
                     }
                 }
             } else {
-                Text("Scan a QR code to begin")
+                VStack(spacing: 20) {
+                    Text("Ready to Navigate")
+                        .font(.title)
+                        .fontWeight(.semibold)
 
-                Button("Scan") {
-                    showingScanner = true
-                    scanModel.clearLocation()
+                    Text("Tap the scan button and hold your camera up to one of the QR codes posted around the building to get started.")
+                        .font(.body)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal)
+
+                    Button(action: {
+                        showingScanner = true
+                        scanModel.clearLocation()
+                    }) {
+                        Label("Scan QR Code", systemImage: "qrcode.viewfinder")
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Color.accentColor)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                            .padding(.horizontal, 40)
+                    }
                 }
                 .sheet(isPresented: $showingScanner) {
                     CameraView { scannedCode in

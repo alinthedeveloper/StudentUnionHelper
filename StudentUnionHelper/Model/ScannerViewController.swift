@@ -53,6 +53,21 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         previewLayer.videoGravity = .resizeAspectFill
         view.layer.addSublayer(previewLayer)
 
+        let instructionLabel = UILabel()
+        instructionLabel.text = "Align the QR code within the frame to scan"
+        instructionLabel.textColor = .white
+        instructionLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        instructionLabel.textAlignment = .center
+        instructionLabel.numberOfLines = 0
+        instructionLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(instructionLabel)
+
+        NSLayoutConstraint.activate([
+            instructionLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            instructionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            instructionLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
+        ])
+
         DispatchQueue.global(qos: .userInitiated).async {
             self.captureSession.startRunning()
         }
@@ -78,5 +93,10 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         if captureSession.isRunning {
             captureSession.stopRunning()
         }
+    }
+
+    @objc private func dismissScanner() {
+        captureSession.stopRunning()
+        dismiss(animated: true)
     }
 }

@@ -10,29 +10,42 @@ import SwiftUI
 struct HomeView: View {
     var body: some View {
         NavigationView {
-            VStack(spacing: 40) {
+            VStack(spacing: 30) {
                 Text("Student Union Helper")
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .padding(.top, 50)
 
+                Text("Helping nonverbal students navigate the BSU Student Union Building.")
+                    .multilineTextAlignment(.center)
+                    .font(.body)
+                    .padding(.horizontal, 40)
+
                 Spacer()
 
                 VStack(spacing: 20) {
                     NavigationLink(destination: MainView()) {
-                        Text("Scanner")
+                        Label("Open Scanner", systemImage: "qrcode.viewfinder")
                             .frame(maxWidth: .infinity)
                             .padding()
-                            .background(Color.blue)
+                            .background(Color.accentColor)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                            .padding(.horizontal, 40)
+                    }
+                    NavigationLink(destination: PeerToPeerView())
+                    {
+                        Label("Talk to Staff", systemImage: "person.2.circle")
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Color.accentColor)
                             .foregroundColor(.white)
                             .cornerRadius(10)
                             .padding(.horizontal, 40)
                     }
 
-                    Button(action: {
-                        // Help button action goes here
-                    }) {
-                        Text("Help/Info")
+                    NavigationLink(destination: HelpView()) {
+                        Label("Help / Info", systemImage: "info.circle")
                             .frame(maxWidth: .infinity)
                             .padding()
                             .background(Color.orange)
@@ -43,8 +56,13 @@ struct HomeView: View {
                 }
 
                 Spacer()
+
+                Text("© 2025 Boise State University")
+                    .font(.footnote)
+                    .foregroundColor(.gray)
+                    .padding(.bottom, 20)
             }
-            .background(Color.white)
+            .background(Color(.systemGroupedBackground))
             .edgesIgnoringSafeArea(.all)
         }
     }
