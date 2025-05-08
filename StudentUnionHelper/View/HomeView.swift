@@ -14,7 +14,7 @@ struct HomeView: View {
                 Text("Student Union Helper")
                     .font(.largeTitle)
                     .fontWeight(.bold)
-                    .padding(.top, 50)
+                    .padding(.top, 100)
 
                 Text("Helping nonverbal students navigate the BSU Student Union Building.")
                     .multilineTextAlignment(.center)
@@ -56,11 +56,6 @@ struct HomeView: View {
                 }
 
                 Spacer()
-
-                Text("© 2025 Boise State University")
-                    .font(.footnote)
-                    .foregroundColor(.gray)
-                    .padding(.bottom, 20)
             }
             .background(Color(.systemGroupedBackground))
             .edgesIgnoringSafeArea(.all)

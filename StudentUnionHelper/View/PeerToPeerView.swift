@@ -12,40 +12,45 @@ struct PeerToPeerView: View {
     @StateObject private var controller = PeerToPeerController()
     @State private var messageToSend: String = ""
     @State private var selectedCard: PECSCard? = nil
-
     var body: some View {
-        VStack(spacing: 20) {
-            Text("Talk to Staff")
-                .font(.title2)
-                .fontWeight(.bold)
-
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 100))]) {
-                ForEach(defaultPECSCards) { card in
-                    Button(action: {
-                        selectedCard = card
-                    }) {
-                        VStack {
-                            Image(systemName: card.systemImageName)
-                                .font(.largeTitle)
-                            Text(card.label)
-                                .font(.caption)
+        GeometryReader { geo in
+            VStack(spacing: 10) {
+                Text("Talk to Staff")
+                    .font(.title2)
+                    .fontWeight(.bold)
+                
+                ScrollView(.horizontal, showsIndicators: false) {
+                    LazyHGrid(rows: Array(repeating: GridItem(.fixed(100)), count: 3), spacing: 16) {
+                        ForEach(defaultPECSCards) { card in
+                            Button(action: {
+                                selectedCard = card
+                            }) {
+                                VStack {
+                                    Image(systemName: card.systemImageName)
+                                        .font(.largeTitle)
+                                    Text(card.label)
+                                        .font(.caption)
+                                }
+                                .padding()
+                                .frame(width: 100, height: 100)
+                                .background(Color.blue.opacity(0.2))
+                                .cornerRadius(10)
+                            }
                         }
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .background(Color.blue.opacity(0.2))
-                        .cornerRadius(10)
                     }
+                    .padding(.horizontal)
                 }
+                .frame(height: geo.size.height * 0.4)
+                
+                List(controller.receivedMessages, id: \.self) { msg in
+                    Text(msg)
+                }
+                .frame(height: geo.size.height * 0.6)
+                
+                Spacer()
             }
-            .padding(.horizontal)
-
-            List(controller.receivedMessages, id: \.self) { msg in
-                Text(msg)
-            }
-
-            Spacer()
+            .padding()
         }
-        .padding()
         .onAppear { controller.start() }
         .onDisappear { controller.stop() }
         .sheet(item: $selectedCard) { card in
